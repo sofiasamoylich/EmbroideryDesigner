@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ua.kma.vyshyvka.controller.MainController"
+            styleClass="root-pane">
+
+    <fx:define>
+        <ToggleGroup fx:id="toolGroup"/>
+        <ToggleGroup fx:id="stitchGroup"/>
+    </fx:define>
+
+    <top>
+        <VBox styleClass="top-bar">
+            <MenuBar styleClass="menu-bar">
+                <menus>
+                    <Menu text="File">
+                        <items>
+                            <MenuItem text="New"       onAction="#onNew"    accelerator="Ctrl+N"/>
+                            <MenuItem text="Open…"     onAction="#onOpen"   accelerator="Ctrl+O"/>
+                            <MenuItem text="Save"      onAction="#onSave"   accelerator="Ctrl+S"/>
+                            <SeparatorMenuItem/>
+                            <MenuItem text="Export PNG…" onAction="#onExportPng"/>
+                            <MenuItem text="Export JSON…" onAction="#onExportJson"/>
+                        </items>
+                    </Menu>
+                    <Menu text="Edit">
+                        <items>
+                            <MenuItem text="Undo" onAction="#onUndo" accelerator="Ctrl+Z"/>
+                            <MenuItem text="Redo" onAction="#onRedo" accelerator="Ctrl+Shift+Z"/>
+                        </items>
+                    </Menu>
+                    <Menu text="Generate">
+                        <items>
+                            <MenuItem text="Pattern from Name…" onAction="#onGenerateFromName"/>
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+
+            <ToolBar styleClass="main-toolbar">
+                <Label text="TOOLS" styleClass="toolbar-label"/>
+                <ToggleButton fx:id="btnPencil"   text="✏"  styleClass="tool-btn" toggleGroup="$toolGroup" selected="true"/>
+                <ToggleButton fx:id="btnEraser"   text="⬜"  styleClass="tool-btn" toggleGroup="$toolGroup"/>
+                <ToggleButton fx:id="btnFill"     text="🪣"  styleClass="tool-btn" toggleGroup="$toolGroup"/>
+                <ToggleButton fx:id="btnEyedrop"  text="💧"  styleClass="tool-btn" toggleGroup="$toolGroup"/>
+
+                <Separator/>
+                <Label text="SYMMETRY" styleClass="toolbar-label"/>
+                <ToggleButton fx:id="btnSymHoriz"  text="⬌ H"  styleClass="sym-btn" onAction="#onToggleSymmetry"/>
+                <ToggleButton fx:id="btnSymVert"   text="⬍ V"  styleClass="sym-btn" onAction="#onToggleSymmetry"/>
+                <ToggleButton fx:id="btnSym4Way"   text="✛ 4"  styleClass="sym-btn" onAction="#onToggleSymmetry"/>
+                <ToggleButton fx:id="btnSymRotary" text="↻ R"  styleClass="sym-btn" onAction="#onToggleSymmetry"/>
+
+                <Separator/>
+                <Label text="SIZE" styleClass="toolbar-label"/>
+                <Slider fx:id="cellSizeSlider" min="4" max="40" value="16" showTickMarks="true" styleClass="zoom-slider"/>
+                <Label fx:id="cellSizeLabel" text="16px" styleClass="toolbar-label"/>
+            </ToolBar>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox styleClass="side-panel" spacing="8" prefWidth="200">
+            <padding><Insets top="12" right="8" bottom="12" left="8"/></padding>
+            <Label text="PALETTE" styleClass="panel-title"/>
+            <Pane fx:id="colorWheelContainer" prefHeight="160"/>
+            <Label text="SWATCHES" styleClass="panel-subtitle"/>
+            <FlowPane fx:id="swatchesPane" hgap="4" vgap="4" prefWidth="184"/>
+            <Separator/>
+            <Label text="CURRENT COLOR" styleClass="panel-subtitle"/>
+            <Pane fx:id="currentColorSwatch" prefHeight="40" styleClass="color-swatch-large"/>
+            <Separator/>
+            <Label text="ELEMENT LIBRARY" styleClass="panel-title"/>
+            <ScrollPane fx:id="elementLibraryScroll" styleClass="element-scroll" fitToWidth="true" prefHeight="200">
+                <content>
+                    <FlowPane fx:id="elementLibraryPane" hgap="4" vgap="4"/>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane styleClass="canvas-viewport">
+            <ScrollPane fx:id="canvasScrollPane" styleClass="canvas-scroll" pannable="true" fitToWidth="false" fitToHeight="false">
+                <content>
+                    <Pane fx:id="canvasContainer"/>
+                </content>
+            </ScrollPane>
+            <HBox styleClass="zoom-overlay" alignment="BOTTOM_RIGHT" spacing="4">
+                <padding><Insets bottom="12" right="12"/></padding>
+                <Button text="−" styleClass="zoom-btn" onAction="#onZoomOut"/>
+                <Button text="⊡" styleClass="zoom-btn" onAction="#onZoomReset"/>
+                <Button text="+" styleClass="zoom-btn" onAction="#onZoomIn"/>
+            </HBox>
+        </StackPane>
+    </center>
+
+    <right>
+        <VBox styleClass="side-panel" spacing="8" prefWidth="220">
+            <padding><Insets top="12" right="8" bottom="12" left="8"/></padding>
+            <Label text="MOTIF PROPERTIES" styleClass="panel-title"/>
+            <GridPane styleClass="props-grid" hgap="8" vgap="4">
+                <Label text="Grid:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="prop-key"/>
+                <Label fx:id="lblGrid" text="32×32" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="prop-value"/>
+                <Label text="Elements:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="prop-key"/>
+                <Label fx:id="lblElements" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="prop-value"/>
+                <Label text="Symmetry:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="prop-key"/>
+                <Label fx:id="lblSymmetry" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="prop-value"/>
+            </GridPane>
+            <Separator/>
+            <Label text="PATTERN PREVIEW" styleClass="panel-title"/>
+            <Pane fx:id="patternPreviewPane" styleClass="pattern-preview" prefHeight="180" prefWidth="204"/>
+            <Separator/>
+            <Label text="STITCH MODE" styleClass="panel-title"/>
+            <HBox spacing="4">
+                <ToggleButton text="Solid" styleClass="stitch-btn" toggleGroup="$stitchGroup" selected="true" userData="SOLID"/>
+                <ToggleButton text="Cross ✕" styleClass="stitch-btn" toggleGroup="$stitchGroup" userData="CROSS"/>
+                <ToggleButton text="Half ◪" styleClass="stitch-btn" toggleGroup="$stitchGroup" userData="HALF"/>
+            </HBox>
+        </VBox>
+    </right>
+
+    <bottom>
+        <HBox styleClass="status-bar" spacing="16" alignment="CENTER_LEFT">
+            <padding><Insets top="4" right="12" bottom="4" left="12"/></padding>
+            <Label fx:id="lblCoords"  text="(—, —)"    styleClass="status-item"/>
+            <Separator orientation="VERTICAL"/>
+            <Label fx:id="lblZoom"    text="Zoom: 100%" styleClass="status-item"/>
+            <Separator orientation="VERTICAL"/>
+            <Label fx:id="lblStatus"  text="Ready"      styleClass="status-item"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ProgressBar fx:id="progressBar" prefWidth="120" visible="false" styleClass="status-progress"/>
+        </HBox>
+    </bottom>
+</BorderPane>

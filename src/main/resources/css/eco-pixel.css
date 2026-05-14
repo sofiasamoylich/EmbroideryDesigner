@@ -1,0 +1,324 @@
+/* ════════════════════════════════════════════════════════════
+   ECO-PIXEL THEME  |  Vyshyvka Designer
+   Palette:
+     --dark-green : #1D3309   (primary dark)
+     --olive      : #6A804F   (mid tone)
+     --light-green: #C7DA91   (highlight / accent)
+     --sky-blue   : #5C95E0   (selection / active)
+     --canvas-bg  : #F5F0E8   (linen-like canvas)
+     --panel-bg   : #EAE6DC   (panel background)
+     --border     : #B5BFA0   (soft border)
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+.root {
+    -fx-dark-green:   #1D3309;
+    -fx-olive:        #6A804F;
+    -fx-olive-mid:    #8A9E6A;
+    -fx-light-green:  #C7DA91;
+    -fx-sky-blue:     #5C95E0;
+    -fx-canvas-bg:    #F5F0E8;
+    -fx-panel-bg:     #EAE6DC;
+    -fx-panel-dark:   #D4CEBF;
+    -fx-border-color-soft: #B5BFA0;
+    -fx-text-dark:    #1D3309;
+    -fx-text-mid:     #4A5E30;
+    -fx-text-light:   #F5F0E8;
+    -fx-font-family:  "Courier New";   /* pixel-feel monospace */
+    -fx-base:         #EAE6DC;
+    -fx-background:   #EAE6DC;
+}
+
+/* ── Root / Scene ──────────────────────────────────────────── */
+.root-pane {
+    -fx-background-color: -fx-panel-bg;
+}
+
+/* ── Menu Bar ──────────────────────────────────────────────── */
+.menu-bar {
+    -fx-background-color: -fx-dark-green;
+    -fx-padding: 2 8 2 8;
+}
+.menu-bar .menu {
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.08em;
+}
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: -fx-olive;
+}
+.context-menu {
+    -fx-background-color: -fx-dark-green;
+    -fx-border-color: -fx-light-green;
+    -fx-border-width: 1px;
+}
+.menu-item .label {
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 12px;
+}
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -fx-olive;
+}
+
+/* ── Toolbar ───────────────────────────────────────────────── */
+.main-toolbar {
+    -fx-background-color: -fx-olive;
+    -fx-padding: 4 8 4 8;
+    -fx-spacing: 4;
+    -fx-border-color: transparent transparent -fx-border-color-soft transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.toolbar-label {
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.1em;
+    -fx-opacity: 0.85;
+}
+
+/* ── Tool Buttons (pencil, eraser, etc.) ───────────────────── */
+.tool-btn {
+    -fx-background-color: -fx-olive-mid;
+    -fx-text-fill: -fx-text-dark;
+    -fx-font-size: 16px;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-background-radius: 4px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+.tool-btn:hover {
+    -fx-background-color: -fx-light-green;
+}
+.tool-btn:selected {
+    -fx-background-color: -fx-sky-blue;
+    -fx-text-fill: white;
+    -fx-border-color: -fx-dark-green;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+}
+
+/* ── Symmetry Buttons ──────────────────────────────────────── */
+.sym-btn {
+    -fx-background-color: -fx-panel-dark;
+    -fx-text-fill: -fx-text-dark;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-min-height: 32px;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 3px;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+.sym-btn:hover {
+    -fx-background-color: -fx-light-green;
+}
+.sym-btn:selected {
+    -fx-background-color: -fx-dark-green;
+    -fx-text-fill: -fx-light-green;
+    -fx-border-color: -fx-light-green;
+}
+
+/* ── Stitch Toggle Buttons ─────────────────────────────────── */
+.stitch-btn {
+    -fx-background-color: -fx-panel-dark;
+    -fx-text-fill: -fx-text-dark;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-background-radius: 3px;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+.stitch-btn:selected {
+    -fx-background-color: -fx-olive;
+    -fx-text-fill: -fx-light-green;
+}
+
+/* ── Zoom Slider ───────────────────────────────────────────── */
+.zoom-slider .track {
+    -fx-background-color: -fx-panel-dark;
+    -fx-background-radius: 2px;
+}
+.zoom-slider .thumb {
+    -fx-background-color: -fx-sky-blue;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 14px;
+    -fx-pref-height: 14px;
+}
+
+/* ── Side Panels ───────────────────────────────────────────── */
+.side-panel {
+    -fx-background-color: -fx-panel-bg;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 0 1 0 0;   /* right border only on LEFT panel */
+}
+
+.panel-title {
+    -fx-text-fill: -fx-dark-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.12em;
+    -fx-padding: 2 0 2 0;
+}
+.panel-subtitle {
+    -fx-text-fill: -fx-olive;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 10px;
+    -fx-letter-spacing: 0.08em;
+}
+
+/* ── Motif Properties Grid ─────────────────────────────────── */
+.prop-key {
+    -fx-text-fill: -fx-olive;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+}
+.prop-value {
+    -fx-text-fill: -fx-dark-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* ── Canvas Viewport ───────────────────────────────────────── */
+.canvas-viewport {
+    -fx-background-color: -fx-canvas-bg;
+}
+.canvas-scroll {
+    -fx-background-color: -fx-canvas-bg;
+    -fx-background: -fx-canvas-bg;
+    -fx-border-color: transparent;
+}
+.canvas-scroll .viewport {
+    -fx-background-color: -fx-canvas-bg;
+}
+/* Hide the ugly default scroll bars, keep them functional */
+.canvas-scroll .scroll-bar:vertical,
+.canvas-scroll .scroll-bar:horizontal {
+    -fx-background-color: -fx-panel-dark;
+    -fx-opacity: 0.7;
+}
+.canvas-scroll .scroll-bar .thumb {
+    -fx-background-color: -fx-olive;
+    -fx-background-radius: 4px;
+}
+
+/* ── Zoom Overlay Buttons ──────────────────────────────────── */
+.zoom-overlay {
+    -fx-background-color: transparent;
+}
+.zoom-btn {
+    -fx-background-color: -fx-dark-green;
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-opacity: 0.85;
+}
+.zoom-btn:hover {
+    -fx-background-color: -fx-olive;
+    -fx-opacity: 1.0;
+}
+
+/* ── Pattern Preview Pane ──────────────────────────────────── */
+.pattern-preview {
+    -fx-background-color: white;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+/* ── Color Swatch (large current color) ───────────────────── */
+.color-swatch-large {
+    -fx-background-color: #6A804F;   /* default olive, overridden in code */
+    -fx-border-color: -fx-dark-green;
+    -fx-border-width: 2px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+/* ── Element Library Scroll ────────────────────────────────── */
+.element-scroll {
+    -fx-background-color: -fx-panel-bg;
+    -fx-background: -fx-panel-bg;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+/* ── Separator ─────────────────────────────────────────────── */
+.separator .line {
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1px;
+}
+
+/* ── Status Bar ────────────────────────────────────────────── */
+.status-bar {
+    -fx-background-color: -fx-dark-green;
+    -fx-min-height: 24px;
+}
+.status-item {
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-opacity: 0.9;
+}
+.status-bar .separator .line {
+    -fx-border-color: -fx-olive;
+    -fx-opacity: 0.5;
+}
+.status-progress {
+    -fx-pref-height: 12px;
+    -fx-accent: -fx-sky-blue;
+}
+.status-progress .bar {
+    -fx-background-color: -fx-sky-blue;
+    -fx-background-radius: 2px;
+}
+.status-progress .track {
+    -fx-background-color: -fx-olive;
+    -fx-background-radius: 2px;
+}
+
+/* ── ScrollBar global ──────────────────────────────────────── */
+.scroll-bar {
+    -fx-background-color: -fx-panel-dark;
+}
+.scroll-bar .thumb {
+    -fx-background-color: -fx-olive-mid;
+    -fx-background-radius: 4px;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: -fx-panel-dark;
+}
+
+/* ── Tooltip ───────────────────────────────────────────────── */
+.tooltip {
+    -fx-background-color: -fx-dark-green;
+    -fx-text-fill: -fx-light-green;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 11px;
+    -fx-background-radius: 3px;
+    -fx-border-color: -fx-olive;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
